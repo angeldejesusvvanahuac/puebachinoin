@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Glosario Farmacéutico</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      background: #f5f5f5;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .term {
+      margin-bottom: 1rem;
+      background: white;
+      padding: 1rem;
+      border-left: 5px solid #0077cc;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .term h3 {
+      margin: 0 0 0.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Glosario de la Industria Farmacéutica</h1>
+  <input type="text" id="searchInput" placeholder="Escribe un término...">
+
+  <div id="glosario">
+    <!-- Términos se mostrarán aquí -->
+  </div>
+
+  <script>
+    const conceptos = [
+      { termino: "Principio activo", definicion: "Sustancia responsable del efecto terapéutico de un medicamento." },
+      { termino: "Biodisponibilidad", definicion: "Proporción de un principio activo que llega al sistema circulatorio y está disponible para actuar." },
+      { termino: "Farmacocinética", definicion: "Estudio del recorrido que hace un fármaco en el cuerpo: absorción, distribución, metabolismo y excreción." },
+      { termino: "Farmacodinámica", definicion: "Estudio de los efectos biológicos del medicamento y su mecanismo de acción en el organismo." },
+      { termino: "Excipient", definicion: "Sustancia inactiva en una formulación farmacéutica que facilita la preparación, conservación o administración." },
+      { termino: "GMP (Buenas Prácticas de Manufactura)", definicion: "Normas que aseguran que los productos se fabrican de forma consistente y controlada." },
+      { termino: "Lote", definicion: "Conjunto definido de producción bajo condiciones uniformes para asegurar homogeneidad." },
+      { termino: "Placebo", definicion: "Sustancia sin efecto terapéutico, utilizada como control en ensayos clínicos." },
+      { termino: "Ensayo clínico", definicion: "Estudio de investigación en humanos para evaluar la eficacia y seguridad de un fármaco." },
+      { termino: "Caducidad", definicion: "Fecha límite en la que un medicamento mantiene sus propiedades y eficacia." }
+    ];
+
+    const glosario = document.getElementById("glosario");
+    const searchInput = document.getElementById("searchInput");
+
+    function mostrarConceptos(filtro = "") {
+      glosario.innerHTML = "";
+      const resultado = conceptos.filter(c => c.termino.toLowerCase().includes(filtro.toLowerCase()));
+      if (resultado.length === 0) {
+        glosario.innerHTML = "<p>No se encontró ningún término.</p>";
+        return;
+      }
+      resultado.forEach(c => {
+        const div = document.createElement("div");
+        div.className = "term";
+        div.innerHTML = `<h3>${c.termino}</h3><p>${c.definicion}</p>`;
+        glosario.appendChild(div);
+      });
+    }
+
+    searchInput.addEventListener("input", () => {
+      mostrarConceptos(searchInput.value);
+    });
+
+    // Mostrar todos al cargar
+    mostrarConceptos();
+  </script>
+</body>
+</html>
